@@ -210,6 +210,26 @@ function buildAdjustedThreeLookup() {
   return adjustedThreeLookup;
 }
 
+function decodeTeammateWowyPayload(detailPayload) {
+  if (Array.isArray(detailPayload.player_teammate_wowy)) {
+    return detailPayload.player_teammate_wowy;
+  }
+
+  const columns = detailPayload.player_teammate_wowy_columns;
+  const rows = detailPayload.player_teammate_wowy_rows;
+  if (!Array.isArray(columns) || !Array.isArray(rows)) {
+    return [];
+  }
+
+  return rows.map((values) => {
+    const record = {};
+    columns.forEach((column, index) => {
+      record[column] = values[index];
+    });
+    return record;
+  });
+}
+
 async function ensureTeammateWowyLoaded() {
   if (currentDataset && currentDataset.player_teammate_wowy) return;
   if (teammateWowyPromise) {
@@ -231,7 +251,7 @@ async function ensureTeammateWowyLoaded() {
       throw new Error(`Failed to load WOWY detail: ${response.status}`);
     }
     const detailPayload = await response.json();
-    currentDataset.player_teammate_wowy = detailPayload.player_teammate_wowy || [];
+    currentDataset.player_teammate_wowy = decodeTeammateWowyPayload(detailPayload);
     adjustedThreeLookup = null;
   })();
 
@@ -437,7 +457,6 @@ async function rerender() {
   renderCards(rows);
   renderTable('positive-table', rows, true);
   renderTable('negative-table', rows, false);
-  maybePrefetchTeammateWowy();
 }
 
 function repopulateFilters() {
@@ -460,6 +479,8 @@ async function loadSeason(season) {
   teammateWowyPromise = null;
   adjustedThreeLookup = null;
   teammateWowyPrefetched = false;
+  setStatus(`Loading ${season} WOWY detail...`, 'info');
+  await ensureTeammateWowyLoaded();
   buildSharedEligibleUniverse();
   repopulateFilters();
   await rerender();
