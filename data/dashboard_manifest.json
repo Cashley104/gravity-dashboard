@@ -1,0 +1,10 @@
+{
+    "default_season":  "2025-26",
+    "seasons":  [
+                    {
+                        "season":  "2025-26",
+                        "data_path":  "./data/dashboard_2025-26.json",
+                        "wowy_data_path":  "./data/dashboard_2025-26_wowy.json"
+                    }
+                ]
+}

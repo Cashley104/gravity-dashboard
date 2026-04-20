@@ -1,0 +1,200 @@
+:root {
+  --bg: #f4efe5;
+  --ink: #192126;
+  --muted: #536069;
+  --panel: rgba(255,255,255,0.8);
+  --line: rgba(25,33,38,0.12);
+  --accent: #b64b2a;
+  --accent-soft: #f3d3c6;
+  --good: #156f52;
+  --bad: #9f2f2f;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(182,75,42,0.18), transparent 35%),
+    linear-gradient(180deg, #fbf7f0 0%, var(--bg) 100%);
+}
+.page {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+.hero { margin-bottom: 24px; }
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+}
+h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2.2rem, 5vw, 4.4rem);
+  line-height: 0.94;
+}
+.subhead {
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 1rem;
+}
+.explain-button {
+  margin-top: 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(182,75,42,0.2);
+  background: rgba(255,255,255,0.85);
+  color: var(--ink);
+  padding: 10px 16px;
+  font: inherit;
+  cursor: pointer;
+}
+.explain-panel {
+  margin-top: 14px;
+  max-width: 980px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.8);
+}
+.explain-panel h2 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+.explain-panel p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.explain-formula-label {
+  margin-top: 12px !important;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent) !important;
+}
+.explain-formula {
+  margin-top: 6px !important;
+  color: var(--ink) !important;
+  font-family: "Courier New", monospace;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  white-space: pre-line;
+}
+.controls, .cards, .table-block {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 14px 40px rgba(25,33,38,0.06);
+}
+.status {
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.82);
+  color: var(--muted);
+}
+.status[data-tone="success"] {
+  color: var(--good);
+  border-color: rgba(21,111,82,0.2);
+}
+.status[data-tone="error"] {
+  color: var(--bad);
+  border-color: rgba(159,47,47,0.2);
+}
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+label {
+  display: grid;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+input, select {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.92);
+  color: var(--ink);
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+.card {
+  padding: 14px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(243,211,198,0.48));
+  border: 1px solid rgba(182,75,42,0.1);
+}
+.card-label, .card-note { margin: 0; }
+.card-label {
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.card-value {
+  margin: 10px 0 8px;
+  font-size: 1.45rem;
+  line-height: 1.1;
+}
+.card-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.table-block {
+  padding: 18px;
+  margin-bottom: 18px;
+  overflow-x: auto;
+}
+.source-note {
+  margin: 8px 4px 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+.table-header h2 {
+  margin: 0 0 6px;
+}
+.table-header p {
+  margin: 0 0 14px;
+  color: var(--muted);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 880px;
+}
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+.player-name-cell {
+  white-space: nowrap;
+}
+th {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.pos { color: var(--good); font-weight: 700; }
+.neg { color: var(--bad); font-weight: 700; }
+@media (max-width: 700px) {
+  .page { padding: 24px 14px 40px; }
+}

@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gravity NBA Dashboard</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <p class="eyebrow">Gravity NBA</p>
+        <h1>Teammate Shooting Impact</h1>
+        <p class="subhead" id="hero-subhead">Players must have 150+ teammate FGA with the player on the court. Each qualifying teammate needs 25+ teammate FGA with the player, 25+ teammate FGA without the player, and 10+ shared minutes.</p>
+        <button class="explain-button" id="explain-toggle" type="button" aria-expanded="false" aria-controls="explain-panel">Stat Explained</button>
+        <section class="explain-panel" id="explain-panel" hidden>
+          <h2 id="explain-title">Stat Explained</h2>
+          <p id="explain-text">Adjusted WOWY compares teammate shooting with the player on the court versus that teammate's own baseline without the player.</p>
+          <p class="explain-formula-label">Formula</p>
+          <p class="explain-formula" id="explain-formula">&Sigma;((teammate result with player - teammate result without player) &times; weight)
+/ &Sigma;(weight)</p>
+        </section>
+      </section>
+      <section class="controls">
+        <label>Metric View
+          <select id="metric-view">
+            <option value="adjusted" selected>Adjusted WOWY</option>
+            <option value="raw">Raw On/Off</option>
+          </select>
+        </label>
+        <label>Stat
+          <select id="stat-view">
+            <option value="efg">eFG%</option>
+            <option value="three">3P%</option>
+          </select>
+        </label>
+        <label>Team
+          <select id="team-filter"></select>
+        </label>
+        <label>Position
+          <select id="position-filter"></select>
+        </label>
+        <label>Search
+          <input id="search-filter" type="search" placeholder="Player name">
+        </label>
+        <label>Min sample minutes
+          <input id="minutes-filter" type="number" min="0" step="1" value="0">
+        </label>
+      </section>
+      <section class="status" id="status-banner" hidden>Loading dashboard data...</section>
+      <section class="cards" id="summary-cards"></section>
+      <section class="table-block">
+        <div class="table-header">
+          <h2 id="positive-title">Top 25 Positive eFG% Adjusted</h2>
+          <p id="positive-subhead">Sorted by weighted adjusted eFG% over teammate baseline.</p>
+        </div>
+        <table id="positive-table">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+      <section class="table-block">
+        <div class="table-header">
+          <h2 id="negative-title">Top 25 Negative eFG% Adjusted</h2>
+          <p id="negative-subhead">Lowest weighted adjusted eFG% under the same filters.</p>
+        </div>
+        <table id="negative-table">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+      <p class="source-note">Data source: NBA play-by-play and rotation data via public `nba_api` endpoints.</p>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
+
+
